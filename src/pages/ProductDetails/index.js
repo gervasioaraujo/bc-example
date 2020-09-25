@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { getProduct } from '../../store/modules/products/actions';
 import { FeedbackText } from '../../components';
 import { Container } from '../../styles/layout';
-import { ProductWrapper } from './styles';
+import { ProductWrapper, ProductInfo } from './styles';
 
 export default function ProductsDetails() {
 
@@ -31,10 +31,12 @@ export default function ProductsDetails() {
       {productDetails &&
         <ProductWrapper>
           <img src={productDetails.photo_url} alt={productDetails.name} />
-          <h2>{productDetails.name}</h2>
-          <span>{productDetails.category}</span>
-          <span>{productDetails.description}</span>
-          <span className="price">{productDetails.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+          <ProductInfo>
+            <h2>{productDetails.name}</h2>
+            <span>{productDetails.category}</span>
+            <span>{productDetails.description}</span>
+            <span className="price">{productDetails.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+          </ProductInfo>
         </ProductWrapper>
       }
     </Container>
