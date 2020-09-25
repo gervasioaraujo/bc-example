@@ -3,13 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from "react-router-dom";
 
 import { getProduct } from '../../store/modules/products/actions';
-import { ProductItem } from '../../components';
-import { Container } from './styles';
+import { FeedbackText } from '../../components';
+import { Container } from '../../styles/layout';
+import { ProductWrapper } from './styles';
 
 export default function ProductsDetails() {
 
   const {
-    products: { loading, productDetails },
+    products: { loading, productDetails, error },
   } = useSelector(state => state);
   const dispatch = useDispatch();
 
@@ -19,12 +20,23 @@ export default function ProductsDetails() {
     dispatch(getProduct(productId));
   }, []);
 
-  console.log(loading);
+  console.log(productDetails);
 
   return (
     <Container>
-      {loading && <p>Buscando...</p>}
-      {!loading && <p>{productDetails ?.name}</p>}
+      {loading && <p>Carregando...</p>}
+      {(!loading && error) &&
+        <FeedbackText text={error} type="error" />
+      }
+      {productDetails &&
+        <ProductWrapper>
+          <img src={productDetails.photo_url} alt={productDetails.name} />
+          <h2>{productDetails.name}</h2>
+          <span>{productDetails.category}</span>
+          <span>{productDetails.description}</span>
+          <span className="price">{productDetails.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+        </ProductWrapper>
+      }
     </Container>
   );
 }

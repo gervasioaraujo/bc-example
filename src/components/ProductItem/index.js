@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Touchable } from './styles';
+import { Touchable, ProductInfo } from './styles';
 
 export default function ProductItem({ data }) {
 
@@ -13,11 +14,20 @@ export default function ProductItem({ data }) {
       pathname: '/productDetails',
       state: { productId: id }
     }}>
-      <span> -> {id}</span>
       <img src={photo_url} alt={name} />
-      <h2>{name} </h2>
-      <span> -> {price}</span>
+      <ProductInfo>
+        <h2>{name}</h2>
+        <span>{price.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}</span>
+      </ProductInfo>
     </Touchable>
   );
 
 }
+
+ProductItem.propTypes = {
+  data: PropTypes.object.isRequired,
+};
+
+ProductItem.defaultProps = {
+  data: {}
+};

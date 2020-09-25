@@ -7,12 +7,11 @@ function getProductsFromAPI() {
 
 export function* getProducts() {
   try {
-    const { status, data } = yield call(getProductsFromAPI);
-    if (status === 200)
-      yield put({ type: 'GET_PRODUCTS_FROM_API_SUCCED', payload: { data } });
-    else console.log('Error');
+    const response = yield call(getProductsFromAPI);
+    if (response.status === 200)
+      yield put({ type: 'GET_PRODUCTS_FROM_API_SUCCED', payload: { data: response.data } });
   } catch (err) {
-    // Saída de Erro
+    yield put({ type: 'GET_PRODUCTS_FROM_API_FAILS', payload: { error: err.message } });
   }
 }
 
@@ -22,12 +21,11 @@ function getProductByIdFromAPI(id) {
 
 export function* getProductById({ payload: { id } }) {
   try {
-    const { status, data } = yield call(getProductByIdFromAPI, id);
-    if (status === 200)
-      yield put({ type: 'GET_PRODUCT_BY_ID_FROM_API_SUCCED', payload: { data } });
-    else console.log('Error');
+    const response = yield call(getProductByIdFromAPI, id);
+    if (response.status === 200)
+      yield put({ type: 'GET_PRODUCT_BY_ID_FROM_API_SUCCED', payload: { data: response.data } });
   } catch (err) {
-    // Saída de Erro
+    yield put({ type: 'GET_PRODUCT_BY_ID_FROM_API_FAILS', payload: { error: err.message } });
   }
 }
 
