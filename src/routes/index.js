@@ -9,7 +9,6 @@ export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
-        {/* <Route exact path="/products" component={ProductsList} /> */}
         <Route exact path="/" component={ProductsList} />
         <Route exact path="/productDetails" component={ProductDetails} />
       </Switch>

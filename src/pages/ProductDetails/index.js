@@ -20,8 +20,6 @@ export default function ProductsDetails() {
     dispatch(getProduct(productId));
   }, []);
 
-  console.log(productDetails);
-
   return (
     <Container>
       {loading && <p>Carregando...</p>}

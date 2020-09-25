@@ -5,15 +5,10 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  height: 100%;
-
   padding: 1vw;
   width: 90vw;
   max-width: 700px;
-
   font-size: 2rem;
-
   background-color: var(--color-box-base);
   hr {
     width: 100%;
